@@ -1,0 +1,492 @@
+/* ==========================================================
+   style.css – vzhled stránky
+   index.html si tenhle soubor načítá přes:
+   <link rel="stylesheet" href="style.css">
+
+   Bloky jdou ve stejném pořadí jako v HTML:
+   0. Barvy a základ
+   1. Navigace
+   2. Hero
+   3. O mně
+   4. Projekty
+   5. Kontakt
+   6. Patička
+   7. Media queries (tablet a mobil)
+   ========================================================== */
+
+
+/* ==================== 0. BARVY A ZÁKLAD ==================== */
+
+/* :root = kořen stránky. Proměnné (--neco) nadefinované tady
+   pak použiješ kdekoli dál přes var(--neco).
+   Chceš jinou barvu? Změň ji jen tady a změní se na celém webu. */
+:root {
+  --color-bg: #FFFFFF;          /* hlavní pozadí – bílá */
+  --color-bg-alt: #F5F7FA;      /* pozadí každé druhé sekce – světle šedá */
+  --color-text: #1A1A1A;        /* hlavní text */
+  --color-text-muted: #5A5A5A;  /* vedlejší text (podnadpisy, popisky) */
+  --color-accent: #2563EB;      /* modrá – tlačítka, odkazy, aktivní položka menu */
+
+  /* Čáry a stíny. Nejsou to nové barvy: rgba(26, 26, 26, …) je barva
+     textu #1A1A1A a rgba(37, 99, 235, …) je modrá #2563EB, jen
+     poloprůhledné (poslední číslo = průhlednost od 0 do 1). */
+  --color-line: rgba(26, 26, 26, 0.1);
+  --shadow: 0 16px 40px rgba(26, 26, 26, 0.12);
+  --shadow-accent: 0 8px 20px rgba(37, 99, 235, 0.3);
+}
+
+/* border-box: padding a rámeček se počítají DO šířky prvku,
+   takže šířka 100 % je opravdu 100 % a nic nepřeteče. */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;    /* plynulé posunutí po kliknutí na odkaz v menu */
+  scroll-padding-top: 64px;   /* při skoku na sekci nechá nahoře místo pro menu (jeho výška) */
+}
+
+body {
+  margin: 0;                  /* zruší okraj 8 px, který dává prohlížeč */
+  /* Systémové písmo – každé zařízení použije svoje vlastní
+     (Windows: Segoe UI, Mac a iPhone: San Francisco, Android: Roboto).
+     Nic se nestahuje, takže se stránka načte hned. */
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  line-height: 1.6;           /* výška řádku = 1,6× velikost písma → lépe se to čte */
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+/* Nadpisy a odstavce mají od prohlížeče vlastní okraje.
+   Vynulujeme je a mezery nastavíme sami tam, kde je chceme. */
+h1, h2, h3, p {
+  margin: 0;
+}
+
+/* Nadpisy: tučné, s těsnějšími řádky */
+h1, h2, h3 {
+  font-weight: 700;
+  line-height: 1.15;
+  text-wrap: balance;         /* rozloží text nadpisu do řádků rovnoměrně */
+}
+
+h2 {
+  font-size: 2.5rem;          /* rem = násobek základního písma: 1rem = 16 px, tady tedy 40 px */
+  margin-bottom: 16px;
+}
+
+/* Obrázek nikdy nebude širší než místo, ve kterém je
+   (jinak by šla stránka na mobilu posouvat do strany). */
+img {
+  display: block;             /* zruší malou mezeru pod obrázkem */
+  max-width: 100%;
+  height: auto;               /* výška se dopočítá, aby se obrázek nezdeformoval */
+}
+
+/* Odkazy: modré a bez podtržení */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+/* Rámeček kolem odkazu při ovládání klávesnicí (klávesa Tab).
+   Při klikání myší se neukazuje. */
+a:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+/* Barvy textu, který označíš myší */
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+/* Obal obsahu: max. 1100 px, vycentrovaný, 20 px od okrajů */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;             /* auto vlevo i vpravo = vycentrování */
+  padding: 0 20px;
+}
+
+/* Společné pro všechny sekce: velká mezera nahoře a dole */
+.section {
+  padding: 96px 0;
+}
+
+/* Sekce se světle šedým pozadím (střídá se s bílou) */
+.section-alt {
+  background-color: var(--color-bg-alt);
+}
+
+/* Podnadpis pod h2 – vedlejší text */
+.section-lead {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  margin-bottom: 48px;
+}
+
+
+/* ==================== 1. NAVIGACE ==================== */
+
+.site-header {
+  position: sticky;           /* při scrollování se „přilepí" nahoru… */
+  top: 0;                     /* …přesně k hornímu okraji okna */
+  z-index: 10;                /* bude vždy NAD obsahem stránky, ne pod ním */
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* Flexbox: logo vlevo, menu vpravo, obojí svisle na středu */
+.header-inner {
+  display: flex;
+  justify-content: space-between;  /* roztlačí logo a menu k okrajům */
+  align-items: center;             /* svislé zarovnání na střed */
+  height: 64px;                    /* stejné číslo jako scroll-padding-top nahoře */
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.menu {
+  display: flex;              /* odkazy vedle sebe */
+  gap: 32px;                  /* mezera mezi nimi */
+}
+
+.menu a {
+  color: var(--color-text-muted);
+  font-weight: 500;
+  transition: color 0.2s ease;     /* barva se změní plynule, ne skokem */
+}
+
+/* Najetí myší na odkaz v menu */
+.menu a:hover {
+  color: var(--color-accent);
+}
+
+/* „Aktivní" položka menu – bez JavaScriptu.
+   Po kliknutí na odkaz se na konec adresy přidá třeba #projekty
+   a sekce s id="projekty" se stane cílem – v CSS je to :target.
+   body:has(#projekty:target) čti jako: „když je na stránce cílem
+   sekce #projekty…" – a pak obarvíme odkaz, který na ni vede. */
+body:has(#o-mne:target) .menu a[href="#o-mne"],
+body:has(#projekty:target) .menu a[href="#projekty"],
+body:has(#kontakt:target) .menu a[href="#kontakt"] {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;  /* tloušťka podtržení */
+  text-underline-offset: 6px;      /* odsazení podtržení od textu */
+}
+
+
+/* ==================== 2. HERO ==================== */
+
+/* Grid = mřížka. Dva sloupce: levý (text) je o trochu širší než pravý (fotka). */
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;  /* fr = díl volného místa, tady 1,2 dílu : 1 díl */
+  gap: 64px;                         /* mezera mezi sloupci */
+  align-items: center;               /* text bude svisle na středu vedle fotky */
+}
+
+/* Malý nadpis nad h1 */
+.hero-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;     /* trochu větší rozestupy mezi písmeny */
+  text-transform: uppercase;  /* zobrazí se VELKÝMI písmeny (v HTML je napsaný normálně) */
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-size: 3.5rem;          /* 56 px */
+  letter-spacing: -0.02em;    /* velké písmo vypadá lépe, když je trochu „stažené" k sobě */
+  margin-bottom: 24px;
+}
+
+.hero-lead {
+  font-size: 1.25rem;
+  color: var(--color-text-muted);
+  margin-bottom: 40px;
+}
+
+/* Tlačítka vedle sebe; když se nevejdou, zalomí se pod sebe */
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Společný vzhled obou tlačítek */
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border: 2px solid var(--color-accent);  /* rámeček mají obě, ať jsou stejně velká */
+  border-radius: 10px;                    /* zaoblené rohy */
+  font-weight: 600;
+  transition: all 0.2s ease;              /* změny po najetí myší proběhnou plynule */
+}
+
+/* Plné modré tlačítko */
+.btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-bg);                 /* bílý text */
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);            /* posune tlačítko o 2 px nahoru */
+  box-shadow: var(--shadow-accent);
+}
+
+/* Obtažené tlačítko: jen modrý rámeček a modrý text */
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-accent);
+}
+
+/* Po najetí myší se obtažené tlačítko vyplní modrou */
+.btn-outline:hover {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  transform: translateY(-2px);
+}
+
+/* Fotka */
+.hero-photo img {
+  width: 100%;
+  aspect-ratio: 6 / 7;        /* poměr stran jako placeholder 600 × 700 */
+  object-fit: cover;          /* jinak velká fotka se ořízne, místo aby se zdeformovala */
+  border-radius: 24px;        /* zaoblené rohy */
+  box-shadow: var(--shadow);  /* jemný stín */
+}
+
+
+/* ==================== 3. O MNĚ ==================== */
+
+.about-text {
+  font-size: 1.125rem;
+  max-width: 65ch;            /* ch = šířka jednoho znaku; moc dlouhé řádky se špatně čtou */
+  margin-bottom: 32px;
+}
+
+/* Řádek štítků */
+.tags {
+  display: flex;
+  flex-wrap: wrap;            /* když se štítky nevejdou do řádku, zalomí se */
+  gap: 12px;
+  list-style: none;           /* bez teček odrážek */
+  margin: 0;
+  padding: 0;                 /* seznam má normálně odsazení zleva – zrušíme ho */
+}
+
+.tags li {
+  padding: 8px 18px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;       /* hodně velké číslo = úplně kulaté konce */
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+
+/* ==================== 4. PROJEKTY ==================== */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;  /* 3 stejně široké sloupce */
+  gap: 32px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;     /* flexbox, ale pod sebou: obrázek nahoře, text pod ním */
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-line);
+  border-radius: 16px;
+  overflow: hidden;           /* obrázek nepřeleze přes zaoblené rohy karty */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Najetí myší: karta se jemně zvedne a dostane stín */
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 3 / 2;        /* všechny obrázky budou stejně vysoké… */
+  object-fit: cover;          /* …a nezdeformují se, i když nahraješ jiný rozměr */
+}
+
+/* Textová část karty. Díky flexboxu můžeme odkaz „přišpendlit" dolů,
+   takže bude ve všech kartách ve stejné výšce, i když je popis různě dlouhý. */
+.card-body {
+  flex-grow: 1;               /* vyplní celou zbývající výšku karty */
+  display: flex;
+  flex-direction: column;     /* nadpis, text a odkaz pod sebou */
+  align-items: flex-start;    /* odkaz nebude roztažený přes celou šířku karty */
+  padding: 24px;
+}
+
+.card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+
+.card p {
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+}
+
+.card-link {
+  margin-top: auto;           /* auto = „všechno volné místo nade mnou" → odkaz je vždy dole */
+  font-weight: 600;
+}
+
+.card-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+
+/* ==================== 5. KONTAKT ==================== */
+
+/* E-mail a telefon vedle sebe; na úzké obrazovce se zalomí pod sebe */
+.contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px 64px;             /* 32 px mezi řádky, 64 px mezi sloupci */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Popisek nad odkazem (E-mail, Telefon) */
+.contact-label {
+  display: block;             /* span je normálně v řádku textu – takhle bude nad odkazem */
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+
+.contact-list a {
+  font-size: 1.5rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;    /* dlouhý e-mail se na úzkém mobilu zalomí, místo aby přetekl */
+}
+
+.contact-list a:hover {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+
+/* ==================== 6. PATIČKA ==================== */
+
+.site-footer {
+  padding: 32px 0;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+
+/* ==================== 7. MEDIA QUERIES ==================== */
+
+/* Tablet a mobil: všechno uvnitř platí jen pro okno široké 768 px a méně */
+@media (max-width: 768px) {
+
+  /* Navigace: menší písmo a mezery, ať se logo i tři odkazy vejdou do jednoho řádku */
+  .logo {
+    font-size: 1rem;          /* 16 px */
+  }
+
+  .menu {
+    gap: 16px;
+  }
+
+  .menu a {
+    font-size: 0.9375rem;     /* 15 px */
+  }
+
+  /* Sekce: o trochu menší mezery (pořád aspoň 80 px) */
+  .section {
+    padding: 80px 0;
+  }
+
+  /* Hero: jeden sloupec místo dvou */
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* order: -1 posune fotku v mřížce před text, tedy nahoru */
+  .hero-photo {
+    order: -1;
+  }
+
+  .hero-photo img {
+    max-width: 420px;         /* na tabletu by jinak byla fotka obrovská */
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .hero-lead {
+    font-size: 1.125rem;
+  }
+
+  /* Projekty: karty pod sebou */
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-list a {
+    font-size: 1.25rem;
+  }
+}
+
+/* Malé telefony (šířka 360 px a méně): menu zmenšíme ještě o kousek */
+@media (max-width: 360px) {
+
+  .logo {
+    font-size: 0.9375rem;     /* 15 px */
+  }
+
+  .menu {
+    gap: 12px;
+  }
+
+  .menu a {
+    font-size: 0.8125rem;     /* 13 px */
+  }
+}
+
+/* Když má někdo v systému zapnuté „omezit animace", pohyb vypneme */
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn,
+  .card {
+    transition: none;
+  }
+
+  .btn:hover,
+  .card:hover {
+    transform: none;
+  }
+}

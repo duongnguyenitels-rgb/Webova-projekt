@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- Bez tohohle řádku by mobil ukázal stránku jako zmenšený web pro počítač -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Duong Nguyen – portfolio</title>
+  <!-- Krátký popis stránky (ukazuje ho třeba Google ve výsledcích hledání) -->
+  <meta name="description"
+    content="Duong Nguyen – student IT na SPŠE a VOŠ Pardubice. Webový vývoj v HTML, CSS a JavaScriptu.">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- navigace -->
+  <!-- Díky CSS (position: sticky) zůstává hlavička nahoře i při scrollování -->
+  <header class="site-header">
+    <!-- .container = obsah široký max. 1100 px a vycentrovaný (viz style.css) -->
+    <div class="container header-inner">
+      <a href="#uvod" class="logo">Duong Nguyen</a>
+
+      <nav class="menu">
+        <a href="#o-mne">O mně</a>
+        <a href="#projekty">Projekty</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- hero -->
+    <section class="section" id="uvod">
+      <div class="container hero-inner">
+
+        <div class="hero-text">
+          <p class="hero-label">Student IT · Pardubice</p>
+          <h1>Jsem Duong Nguyen a&nbsp;tvořím weby</h1>
+          <p class="hero-lead">Zaměřuji se na webový vývoj a&nbsp;stránky stavím v&nbsp;HTML, CSS a&nbsp;JavaScriptu.
+          </p>
+
+          <div class="hero-buttons">
+            <!-- Tlačítka jsou obyčejné odkazy – jako tlačítka vypadají díky CSS -->
+            <a href="#projekty" class="btn btn-primary">Moje projekty</a>
+            <a href="#kontakt" class="btn btn-outline">Kontakt</a>
+          </div>
+        </div>
+
+        <div class="hero-photo">
+          <img src="https://placehold.co/600x700" alt="Duong Nguyen" width="600" height="700">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- about me -->
+    <section class="section section-alt" id="o-mne">
+      <div class="container">
+        <h2>O mně</h2>
+        <p class="about-text">Studuji 2. ročník oboru informační technologie na SPŠE a VOŠ Pardubice. Nejvíc mě zajímá
+          webový vývoj – stránky stavím v HTML a CSS a JavaScriptem jim přidávám interaktivitu. Při práci používám také
+          Git a Figmu.</p>
+
+        <ul class="tags">
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+          <li>Git</li>
+          <li>Figma</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- kontakt  -->
+    <section class="section" id="projekty">
+      <div class="container">
+        <h2>Projekty</h2>
+        <p class="section-lead">Výběr z toho, co jsem vytvořil.</p>
+
+        <div class="projects-grid">
+
+          <article class="card">
+            <img src="https://placehold.co/600x400?text=Portfolio" alt="Náhled projektu Osobní portfolio" width="600"
+              height="400">
+            <div class="card-body">
+              <h3>Osobní portfolio</h3>
+              <p>Tahle stránka. Responzivní web v čistém HTML a CSS, bez JavaScriptu a knihoven.</p>
+              <!-- ODKAZ NA GITHUB PROJEKT -->
+              <a href="#" class="card-link">Zobrazit projekt</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://placehold.co/600x400?text=Projekt+2" alt="Náhled projektu 2" width="600" height="400">
+            <div class="card-body">
+              <h3>Projekt 2</h3>
+              <p>Krátký popis projektu – co umí, v čem je napsaný a co jsem se na něm naučil.</p>
+              <a href="#" class="card-link">Zobrazit projekt</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://placehold.co/600x400?text=Projekt+3" alt="Náhled projektu 3" width="600" height="400">
+            <div class="card-body">
+              <h3>Projekt 3</h3>
+              <p>Krátký popis projektu – co umí, v čem je napsaný a co jsem se na něm naučil.</p>
+              <a href="#" class="card-link">Zobrazit projekt</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- kontakt -->
+    <section class="section section-alt" id="kontakt">
+      <div class="container">
+        <h2>Kontakt</h2>
+        <p class="section-lead">Máte dotaz nebo nápad na spolupráci? Napište mi e-mail nebo zavolejte.</p>
+
+        <ul class="contact-list">
+          <li>
+            <span class="contact-label">E-mail</span>
+            <a href="mailto:duongthai.nguyen09@gmail.com">duongthai.nguyen09@gmail.com</a>
+          </li>
+          <li>
+            <span class="contact-label">Telefon</span>
+            <a href="tel:+420 775 022 787">+420 775 022 787</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Duong Nguyen</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>
