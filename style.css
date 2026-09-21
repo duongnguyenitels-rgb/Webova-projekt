@@ -1,25 +1,3 @@
-/* ==========================================================
-   style.css – vzhled stránky
-   index.html si tenhle soubor načítá přes:
-   <link rel="stylesheet" href="style.css">
-
-   Bloky jdou ve stejném pořadí jako v HTML:
-   0. Barvy a základ
-   1. Navigace
-   2. Hero
-   3. O mně
-   4. Projekty
-   5. Kontakt
-   6. Patička
-   7. Media queries (tablet a mobil)
-   ========================================================== */
-
-
-/* ==================== 0. BARVY A ZÁKLAD ==================== */
-
-/* :root = kořen stránky. Proměnné (--neco) nadefinované tady
-   pak použiješ kdekoli dál přes var(--neco).
-   Chceš jinou barvu? Změň ji jen tady a změní se na celém webu. */
 :root {
   --color-bg: #FFFFFF;          /* hlavní pozadí – bílá */
   --color-bg-alt: #F5F7FA;      /* pozadí každé druhé sekce – světle šedá */
@@ -119,14 +97,6 @@ a:focus-visible {
   background-color: var(--color-bg-alt);
 }
 
-/* Podnadpis pod h2 – vedlejší text */
-.section-lead {
-  font-size: 1.125rem;
-  color: var(--color-text-muted);
-  margin-bottom: 48px;
-}
-
-
 /* ==================== 1. NAVIGACE ==================== */
 
 .site-header {
@@ -167,11 +137,6 @@ a:focus-visible {
   color: var(--color-accent);
 }
 
-/* „Aktivní" položka menu – bez JavaScriptu.
-   Po kliknutí na odkaz se na konec adresy přidá třeba #projekty
-   a sekce s id="projekty" se stane cílem – v CSS je to :target.
-   body:has(#projekty:target) čti jako: „když je na stránce cílem
-   sekce #projekty…" – a pak obarvíme odkaz, který na ni vede. */
 body:has(#o-mne:target) .menu a[href="#o-mne"],
 body:has(#projekty:target) .menu a[href="#projekty"],
 body:has(#kontakt:target) .menu a[href="#kontakt"] {
