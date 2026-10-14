@@ -32,6 +32,19 @@
 
 ---
 
+## Záznam 3: Navigace, dvousloupcový layout a patička
+
+* **Na co jsem se ptal:** 
+  Jak předělat landing page podle zadání: sémantické HTML5 tagy, hlavní menu s CSS dropdownem (:hover), sidebar jako sekundární menu, tmavá patička ve 3 sloupcích a zlom do jednoho sloupce pod 768 px.
+* **Co byl výstup AI:** 
+  AI navrhla rozložení pomocí CSS Grid (`grid-template-areas`), dropdown přes `:hover` a `:focus-within`, sticky sidebar, patičku s odkazy `target="_blank"` a media query pro mobil.
+* **Co jsem použil:** 
+  Úpravy jsem zapracoval do `index.html` a `style.css` a otestoval na počítači i na mobilu.
+* **Zdůvodnění:** 
+  AI mi pomohla s technickým řešením navigace a layoutu, obsah a vzhled stránky zůstal podle mého původního návrhu.
+
+---
+
 ## Finální reflexe práce s AI
 
 AI pro mě fungovala především jako grafický a technický asistent. Samotnou strukturu (wireframe, kostru stránek a rozmístění sekcí) jsem vymyslel a sestavil sám. Claude mi pomohl dotáhnout vizuální stránku – zejména přesné rozměry, efekty u boxů a responzivitu pro mobily. 
