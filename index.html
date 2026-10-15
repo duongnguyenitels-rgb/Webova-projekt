@@ -14,49 +14,67 @@
 
 <body>
 
-  <!-- navigace -->
+  <!-- ============ HLAVIČKA + HLAVNÍ NAVIGACE ============ -->
   <!-- Díky CSS (position: sticky) zůstává hlavička nahoře i při scrollování -->
   <header class="site-header">
     <div class="container header-inner">
       <a href="#uvod" class="logo">Duong Nguyen</a>
 
-      <nav class="menu">
-        <a href="#o-mne">O mně</a>
-        <a href="#projekty">Projekty</a>
-        <a href="#kontakt">Kontakt</a>
+      <!-- aria-label = název navigace pro čtečky obrazovky (stránka má dvě menu) -->
+      <nav class="menu" aria-label="Hlavní navigace">
+        <ul>
+          <li><a href="#uvod">Úvod</a></li>
+          <li><a href="#o-mne">O mně</a></li>
+
+          <!-- Položka s rozbalovacím menu (dropdown).
+               Vnořený <ul> je normálně schovaný, CSS ho ukáže při :hover. -->
+          <li class="has-dropdown">
+            <a href="#projekty">Projekty <span class="arrow" aria-hidden="true">▾</span></a>
+            <ul class="dropdown">
+              <li><a href="#projekt-portfolio">Osobní portfolio</a></li>
+              <li><a href="#projekt-2">Projekt 2</a></li>
+              <li><a href="#projekt-3">Projekt 3</a></li>
+            </ul>
+          </li>
+
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
-  <main>
+  <!-- ============ DVOUSLOUPCOVÝ LAYOUT ============ -->
+  <!-- V HTML je <main> PRVNÍ a <aside> DRUHÝ. Na počítači CSS Grid přesune
+       sidebar doleva, na mobilu zůstane tohle pořadí → sidebar spadne pod obsah. -->
+  <div class="container layout">
 
-    <!-- hero -->
-    <section class="section" id="uvod">
-      <div class="container hero-inner">
+    <main class="content">
 
-        <div class="hero-text">
-          <p class="hero-label">Student IT · Pardubice</p>
-          <h1>Jsem Duong Nguyen   </h1>
-          <p class="hero-lead">Zaměřuji se na webový vývoj a stránky stavím v HTML, CSS a JavaScriptu.
-          </p>
+      <!-- hero -->
+      <section class="section" id="uvod">
+        <div class="hero-inner">
 
-          <div class="hero-buttons">
-            <!-- Tlačítka jsou obyčejné odkazy – jako tlačítka vypadají díky CSS -->
-            <a href="#projekty" class="btn btn-primary">Moje projekty</a>
-            <a href="#kontakt" class="btn btn-outline">Kontakt</a>
+          <div class="hero-text">
+            <p class="hero-label">Student IT · Pardubice</p>
+            <h1>Jsem Duong Nguyen</h1>
+            <p class="hero-lead">Zaměřuji se na webový vývoj a stránky stavím v HTML, CSS a JavaScriptu.</p>
+
+            <div class="hero-buttons">
+              <!-- Tlačítka jsou obyčejné odkazy – jako tlačítka vypadají díky CSS -->
+              <a href="#projekty" class="btn btn-primary">Moje projekty</a>
+              <a href="#kontakt" class="btn btn-outline">Kontakt</a>
+            </div>
           </div>
+
+          <div class="hero-photo">
+            <img src="" alt="Duong Nguyen" width="600" height="700">
+          </div>
+
         </div>
+      </section>
 
-        <div class="hero-photo">
-          <img src="" alt="Duong Nguyen" width="600" height="700">
-        </div>
-
-      </div>
-    </section>
-
-    <!-- about me -->
-    <section class="section section-alt" id="o-mne">
-      <div class="container">
+      <!-- about me -->
+      <section class="section" id="o-mne">
         <h2>O mně</h2>
         <p class="about-text">Studuji 2. ročník oboru informační technologie na SPŠE a VOŠ Pardubice. Baví mě
           programování i webový vývoj – nejvíce pracuji v Javě a Pythonu. Na webu stavím strukturu v HTML a základně
@@ -68,19 +86,17 @@
           <li>JavaScript</li>
           <li>Java</li>
         </ul>
-      </div>
-    </section>
+      </section>
 
-    <!-- kontakt  -->
-    <section class="section" id="projekty">
-      <div class="container">
+      <!-- projekty -->
+      <section class="section" id="projekty">
         <h2>Projekty</h2>
 
         <div class="projects-grid">
 
-          <article class="card">
-            <img src="" alt=" Osobní portfolio" width="600"
-              height="400">
+          <!-- id = cíl odkazu z dropdown menu a ze sidebaru -->
+          <article class="card" id="projekt-portfolio">
+            <img src="" alt="Osobní portfolio" width="600" height="400">
             <div class="card-body">
               <h3>Osobní portfolio</h3>
               <p>....................................</p>
@@ -89,8 +105,8 @@
             </div>
           </article>
 
-          <article class="card">
-            <img src="" alt="projektu 2" width="600" height="400">
+          <article class="card" id="projekt-2">
+            <img src="" alt="Projekt 2" width="600" height="400">
             <div class="card-body">
               <h3>Projekt 2</h3>
               <p>....................................................</p>
@@ -98,8 +114,8 @@
             </div>
           </article>
 
-          <article class="card">
-            <img src="" alt=" projektu 3" width="600" height="400">
+          <article class="card" id="projekt-3">
+            <img src="" alt="Projekt 3" width="600" height="400">
             <div class="card-body">
               <h3>Projekt 3</h3>
               <p>...........................................</p>
@@ -108,12 +124,10 @@
           </article>
 
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- kontakt -->
-    <section class="section section-alt" id="kontakt">
-      <div class="container">
+      <!-- kontakt -->
+      <section class="section" id="kontakt">
         <h2>Kontakt</h2>
         <ul class="contact-list">
           <li>
@@ -122,17 +136,74 @@
           </li>
           <li>
             <span class="contact-label">Telefon</span>
-            <a href="tel:+420 775 022 787">+420 775 022 787</a>
+            <a href="tel:+420775022787">+420 775 022 787</a>
           </li>
         </ul>
-      </div>
-    </section>
+      </section>
 
-  </main>
+    </main>
 
-  <!-- footer -->
+    <!-- ============ SIDEBAR = SEKUNDÁRNÍ MENU ============ -->
+    <aside class="sidebar">
+      <nav aria-label="Obsah stránky">
+        <h2 class="sidebar-title">Na této stránce</h2>
+        <ul class="side-menu">
+          <li><a href="#uvod">Úvod</a></li>
+          <li><a href="#o-mne">O mně</a></li>
+          <li>
+            <a href="#projekty">Projekty</a>
+            <!-- Podmenu: odsazené odkazy přímo na jednotlivé projekty -->
+            <ul>
+              <li><a href="#projekt-portfolio">Osobní portfolio</a></li>
+              <li><a href="#projekt-2">Projekt 2</a></li>
+              <li><a href="#projekt-3">Projekt 3</a></li>
+            </ul>
+          </li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+  </div>
+
+  <!-- ============ PATIČKA (3 sloupce) ============ -->
   <footer class="site-footer">
-    <div class="container">
+    <div class="container footer-grid">
+
+      <div class="footer-col">
+        <h2>Dokumenty</h2>
+        <ul>
+          <li><a href="AI.md">AI deník</a></li>
+          <li><a href="Group 1.pdf">Wireframe (PDF)</a></li>
+          <li><a href="README.md">README</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h2>Kontakty</h2>
+        <ul>
+          <li><a href="mailto:duongthai.nguyen09@gmail.com">duongthai.nguyen09@gmail.com</a></li>
+          <li><a href="tel:+420775022787">+420 775 022 787</a></li>
+          <li>Pardubice, Česko</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h2>Sociální sítě</h2>
+        <!-- target="_blank" = otevře odkaz v novém okně/panelu.
+             rel="noopener noreferrer" = bezpečnost: nová stránka nemůže ovládat tuhle. -->
+        <ul>
+          <li><a href="https://github.com/duongnguyenitels-rgb" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <!-- TODO: nahraď odkazem na svůj profil -->
+          <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <!-- TODO: nahraď odkazem na svůj profil -->
+          <li><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
       <p>© 2026 Duong Nguyen</p>
     </div>
   </footer>
