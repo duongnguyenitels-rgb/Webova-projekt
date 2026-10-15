@@ -231,7 +231,7 @@ body:has(#kontakt:target) :is(.menu, .side-menu) a[href="#kontakt"] {
    i když je v HTML až za <main>. */
 .layout {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: 180px 1fr;
   grid-template-areas: "sidebar content";
   gap: 48px;
   align-items: start;         /* sidebar nebude roztažený na výšku celé stránky */
@@ -247,53 +247,50 @@ body:has(#kontakt:target) :is(.menu, .side-menu) a[href="#kontakt"] {
   position: sticky;           /* sidebar jede při scrollování s tebou */
   top: 96px;                  /* 64 px hlavička + 32 px mezera */
   margin-top: 64px;
-  padding: 24px;
-  background-color: var(--color-bg-alt);
-  border-radius: 16px;
 }
 
 
 /* ==================== 1c. SIDEBAR (SEKUNDÁRNÍ MENU) ==================== */
 
+/* Malý šedý nadpis skupiny */
 .sidebar-title {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-text-muted);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
-.side-menu,
-.side-menu ul {
+/* Seznam odkazů se svislou čárou vlevo */
+.side-menu {
   list-style: none;
-  margin: 0;
+  margin: 0 0 32px;
   padding: 0;
-}
-
-/* Podmenu je odsazené a má svislou čáru vlevo → je vidět, že patří pod „Projekty" */
-.side-menu ul {
-  margin: 4px 0 4px 12px;
-  padding-left: 12px;
-  border-left: 2px solid var(--color-line);
+  border-left: 1px solid var(--color-line);
 }
 
 .side-menu a {
   display: block;
-  padding: 6px 12px;
-  border-radius: 8px;
-  color: var(--color-text);
-  font-weight: 500;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.side-menu ul a {
-  font-size: 0.9375rem;
+  padding: 6px 0 6px 16px;
+  margin-left: -1px;                    /* proužek leží přesně na šedé čáře */
+  border-left: 2px solid transparent;   /* neviditelný proužek, ukáže se při hover */
   color: var(--color-text-muted);
+  font-size: 0.9375rem;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
+/* Najetí myší: text ztmavne a objeví se šedý proužek */
 .side-menu a:hover {
-  background-color: var(--color-bg);
-  color: var(--color-accent);
+  color: var(--color-text);
+  border-left-color: var(--color-text-muted);
+}
+
+/* Aktivní sekce (po kliknutí): modrý proužek */
+body:has(#uvod:target) .side-menu a[href="#uvod"],
+body:has(#o-mne:target) .side-menu a[href="#o-mne"],
+body:has(#projekty:target) .side-menu a[href="#projekty"],
+body:has(#kontakt:target) .side-menu a[href="#kontakt"] {
+  border-left-color: var(--color-accent);
 }
 
 
@@ -623,6 +620,8 @@ h1 {
   .sidebar {
     position: static;         /* na mobilu se sidebar nepřilepuje */
     margin-top: 0;
+    padding-top: 48px;
+    border-top: 1px solid var(--color-line);
   }
 
   .section {
