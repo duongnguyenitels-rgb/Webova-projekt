@@ -1,614 +1,405 @@
-:root {
-  --color-bg: #FFFFFF;          /* hlavní pozadí – bílá */
-  --color-bg-alt: #F5F7FA;      /* pozadí každé druhé sekce – světle šedá */
-  --color-text: #1A1A1A;        /* hlavní text */
-  --color-text-muted: #5A5A5A;  /* vedlejší text (podnadpisy, popisky) */
-  --color-accent: #2563EB;      /* modrá – tlačítka, odkazy, aktivní položka menu */
-
-  /* Čáry a stíny. Nejsou to nové barvy: rgba(26, 26, 26, …) je barva
-     textu #1A1A1A a rgba(37, 99, 235, …) je modrá #2563EB, jen
-     poloprůhledné (poslední číslo = průhlednost od 0 do 1). */
-  --color-line: rgba(26, 26, 26, 0.1);
-  --shadow: 0 16px 40px rgba(26, 26, 26, 0.12);
-  --shadow-accent: 0 8px 20px rgba(37, 99, 235, 0.3);
-}
-
-/* border-box: padding a rámeček se počítají DO šířky prvku,
-   takže šířka 100 % je opravdu 100 % a nic nepřeteče. */
 * {
   box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth;    /* plynulé posunutí po kliknutí na odkaz v menu */
-  scroll-padding-top: 64px;   /* při skoku na sekci nechá nahoře místo pro menu (jeho výška) */
+  scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;                  /* zruší okraj 8 px, který dává prohlížeč */
-  /* Systémové písmo – každé zařízení použije svoje vlastní
-     (Windows: Segoe UI, Mac a iPhone: San Francisco, Android: Roboto).
-     Nic se nestahuje, takže se stránka načte hned. */
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  line-height: 1.6;           /* výška řádku = 1,6× velikost písma → lépe se to čte */
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #222;
+  background-color: white;
 }
 
-/* Nadpisy a odstavce mají od prohlížeče vlastní okraje.
-   Vynulujeme je a mezery nastavíme sami tam, kde je chceme. */
 h1, h2, h3, p {
   margin: 0;
 }
 
-/* Nadpisy: tučné, s těsnějšími řádky */
-h1, h2, h3 {
-  font-weight: 700;
-  line-height: 1.15;
-  text-wrap: balance;         /* rozloží text nadpisu do řádků rovnoměrně */
-}
-
 h2 {
-  font-size: 2.5rem;          /* rem = násobek základního písma: 1rem = 16 px, tady tedy 40 px */
-  margin-bottom: 16px;
+  font-size: 36px;
+  margin-bottom: 15px;
 }
 
-/* Obrázek nikdy nebude širší než místo, ve kterém je
-   (jinak by šla stránka na mobilu posouvat do strany). */
 img {
-  display: block;             /* zruší malou mezeru pod obrázkem */
   max-width: 100%;
-  height: auto;               /* výška se dopočítá, aby se obrázek nezdeformoval */
 }
 
-/* Odkazy: modré a bez podtržení */
 a {
-  color: var(--color-accent);
+  color: #1e6fd9;
   text-decoration: none;
 }
 
-/* Rámeček kolem odkazu při ovládání klávesnicí (klávesa Tab).
-   Při klikání myší se neukazuje. */
-a:focus-visible {
-  outline: 3px solid var(--color-accent);
-  outline-offset: 4px;
-}
-
-/* Barvy textu, který označíš myší */
-::selection {
-  background-color: var(--color-accent);
-  color: var(--color-bg);
-}
-
-/* Obal obsahu: max. 1100 px, vycentrovaný, 20 px od okrajů */
 .container {
   max-width: 1100px;
-  margin: 0 auto;             /* auto vlevo i vpravo = vycentrování */
+  margin: 0 auto;
   padding: 0 20px;
 }
 
-/* Společné pro všechny sekce: velká mezera nahoře a dole */
 .section {
-  padding: 64px 0;
+  padding: 60px 0;
+  border-bottom: 1px solid #ddd;
 }
 
-/* Mezi sekcemi tenká čára (sekce jsou teď ve sloupci vedle sidebaru) */
-.section + .section {
-  border-top: 1px solid var(--color-line);
-}
 
-/* ==================== 1. NAVIGACE ==================== */
+/* hlavicka */
 
 .site-header {
-  position: sticky;           /* při scrollování se „přilepí" nahoru… */
-  top: 0;                     /* …přesně k hornímu okraji okna */
-  z-index: 10;                /* bude vždy NAD obsahem stránky, ne pod ním */
-  background-color: var(--color-bg);
-  border-bottom: 1px solid var(--color-line);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: white;
+  border-bottom: 1px solid #ddd;
 }
 
-/* Flexbox: logo vlevo, menu vpravo, obojí svisle na středu */
 .header-inner {
   display: flex;
-  justify-content: space-between;  /* roztlačí logo a menu k okrajům */
-  align-items: center;             /* svislé zarovnání na střed */
-  height: 64px;                    /* stejné číslo jako scroll-padding-top nahoře */
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
 }
 
 .logo {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--color-text);
+  font-size: 20px;
+  font-weight: bold;
+  color: #222;
 }
 
-/* Seznam položek menu vedle sebe */
-.menu > ul {
+/* menu */
+
+.menu ul {
   display: flex;
-  gap: 32px;                  /* mezera mezi položkami */
+  gap: 30px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .menu a {
-  display: block;
-  color: var(--color-text-muted);
-  font-weight: 500;
-  transition: color 0.2s ease;     /* barva se změní plynule, ne skokem */
+  color: #555;
 }
 
-/* Najetí myší na odkaz v menu */
 .menu a:hover {
-  color: var(--color-accent);
+  color: #1e6fd9;
 }
 
-/* ---------- Dropdown (rozbalovací menu) ---------- */
-
-/* Položka s dropdownem je „kotva": podmenu se pozicuje vůči ní */
 .has-dropdown {
   position: relative;
 }
 
-/* Šipka ▾ vedle textu „Projekty" */
 .arrow {
-  display: inline-block;
-  font-size: 0.75em;
-  transition: transform 0.2s ease;
+  font-size: 12px;
 }
 
-/* Samotné podmenu: normálně schované */
-.dropdown {
-  position: absolute;         /* vytrhne se z toku stránky a „plave" nad obsahem */
-  top: 100%;                  /* hned pod položkou „Projekty" */
-  left: -16px;
-  min-width: 200px;
-  list-style: none;
-  margin: 0;
-  padding: 8px 0;
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-line);
-  border-radius: 12px;
-  box-shadow: var(--shadow);
-
-  /* Schování: neviditelné a nedá se na něj kliknout.
-     (display: none by nešlo plynule animovat, opacity ano.) */
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(8px);
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-}
-
-/* Neviditelný „můstek" nad podmenu: když jedeš myší dolů,
-   nepřerušíš :hover v mezeře mezi položkou a podmenu. */
-.dropdown::before {
-  content: "";
+/* dropdown - schovany dokud na nej nenajedu */
+.menu .dropdown {
+  display: none;
   position: absolute;
-  top: -12px;
-  left: 0;
-  right: 0;
-  height: 12px;
+  top: 100%;
+  left: -15px;
+  width: 200px;
+  padding: 5px 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
 }
 
-/* TADY je to hlavní: najetí myší (:hover) na položku → podmenu se ukáže.
-   :focus-within = totéž pro ovládání klávesnicí (Tab). */
-.has-dropdown:hover .dropdown,
-.has-dropdown:focus-within .dropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-/* Šipka se při rozbalení otočí nahoru */
-.has-dropdown:hover .arrow,
-.has-dropdown:focus-within .arrow {
-  transform: rotate(180deg);
+.menu .has-dropdown:hover .dropdown,
+.menu .has-dropdown:focus-within .dropdown {
+  display: block;
 }
 
 .dropdown a {
-  padding: 10px 16px;
-  white-space: nowrap;        /* text se nezalomí na dva řádky */
+  display: block;
+  padding: 8px 15px;
 }
 
 .dropdown a:hover {
-  background-color: var(--color-bg-alt);
-}
-
-/* Aktivní položka: zvýrazní odkaz na sekci, na kterou jsi právě klikl
-   (:target = prvek, jehož id je v adrese za #). Platí pro obě menu. */
-body:has(#uvod:target) :is(.menu, .side-menu) a[href="#uvod"],
-body:has(#o-mne:target) :is(.menu, .side-menu) a[href="#o-mne"],
-body:has(#projekty:target) :is(.menu, .side-menu) a[href="#projekty"],
-body:has(#kontakt:target) :is(.menu, .side-menu) a[href="#kontakt"] {
-  color: var(--color-accent);
-  font-weight: 700;
+  background-color: #f2f2f2;
 }
 
 
-/* ==================== 1b. DVOUSLOUPCOVÝ LAYOUT ==================== */
+/* layout - vlevo sidebar, vpravo obsah */
 
-/* CSS Grid se dvěma sloupci: úzký sidebar (240 px) a obsah (zbytek).
-   grid-template-areas = „mapa" rozložení. Sidebar je vlevo,
-   i když je v HTML až za <main>. */
 .layout {
   display: grid;
   grid-template-columns: 180px 1fr;
   grid-template-areas: "sidebar content";
-  gap: 48px;
-  align-items: start;         /* sidebar nebude roztažený na výšku celé stránky */
+  gap: 50px;
+  align-items: start;
 }
 
 .content {
   grid-area: content;
-  min-width: 0;               /* obsah se smí zúžit (jinak by grid mohl přetéct) */
 }
 
 .sidebar {
   grid-area: sidebar;
-  position: sticky;           /* sidebar jede při scrollování s tebou */
-  top: 96px;                  /* 64 px hlavička + 32 px mezera */
-  margin-top: 64px;
+  position: sticky;
+  top: 90px;
+  margin-top: 60px;
 }
 
-
-/* ==================== 1c. SIDEBAR (SEKUNDÁRNÍ MENU) ==================== */
-
-/* Malý šedý nadpis skupiny */
 .sidebar-title {
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  font-size: 13px;
   text-transform: uppercase;
-  color: var(--color-text-muted);
-  margin-bottom: 12px;
+  color: #777;
+  margin-bottom: 10px;
 }
 
-/* Seznam odkazů se svislou čárou vlevo */
 .side-menu {
   list-style: none;
-  margin: 0 0 32px;
+  margin: 0;
   padding: 0;
-  border-left: 1px solid var(--color-line);
+  border-left: 2px solid #ddd;
 }
 
 .side-menu a {
   display: block;
-  padding: 6px 0 6px 16px;
-  margin-left: -1px;                    /* proužek leží přesně na šedé čáře */
-  border-left: 2px solid transparent;   /* neviditelný proužek, ukáže se při hover */
-  color: var(--color-text-muted);
-  font-size: 0.9375rem;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  padding: 5px 15px;
+  color: #555;
 }
 
-/* Najetí myší: text ztmavne a objeví se šedý proužek */
 .side-menu a:hover {
-  color: var(--color-text);
-  border-left-color: var(--color-text-muted);
-}
-
-/* Aktivní sekce (po kliknutí): modrý proužek */
-body:has(#uvod:target) .side-menu a[href="#uvod"],
-body:has(#o-mne:target) .side-menu a[href="#o-mne"],
-body:has(#projekty:target) .side-menu a[href="#projekty"],
-body:has(#kontakt:target) .side-menu a[href="#kontakt"] {
-  border-left-color: var(--color-accent);
+  color: #1e6fd9;
 }
 
 
-/* ==================== 2. HERO ==================== */
+/* hero */
 
-/* Grid = mřížka. Dva sloupce: levý (text) je o trochu širší než pravý (fotka). */
 .hero-inner {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;  /* fr = díl volného místa, tady 1,2 dílu : 1 díl */
-  gap: 40px;                         /* mezera mezi sloupci */
-  align-items: center;               /* text bude svisle na středu vedle fotky */
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
 }
 
-/* Malý nadpis nad h1 */
 .hero-label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;     /* trochu větší rozestupy mezi písmeny */
-  text-transform: uppercase;  /* zobrazí se VELKÝMI písmeny (v HTML je napsaný normálně) */
-  color: var(--color-text-muted);
-  margin-bottom: 16px;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #777;
+  margin-bottom: 15px;
 }
 
 h1 {
-  font-size: 3rem;            /* 48 px */
-  letter-spacing: -0.02em;    /* velké písmo vypadá lépe, když je trochu „stažené" k sobě */
-  margin-bottom: 24px;
+  font-size: 46px;
+  line-height: 1.2;
+  margin-bottom: 20px;
 }
 
 .hero-lead {
-  font-size: 1.25rem;
-  color: var(--color-text-muted);
-  margin-bottom: 40px;
+  font-size: 20px;
+  color: #555;
+  margin-bottom: 30px;
 }
 
-/* Tlačítka vedle sebe; když se nevejdou, zalomí se pod sebe */
-.hero-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-/* Společný vzhled obou tlačítek */
 .btn {
   display: inline-block;
-  padding: 14px 28px;
-  border: 2px solid var(--color-accent);  /* rámeček mají obě, ať jsou stejně velká */
-  border-radius: 10px;                    /* zaoblené rohy */
-  font-weight: 600;
-  transition: all 0.2s ease;              /* změny po najetí myší proběhnou plynule */
+  padding: 12px 25px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #1e6fd9;
+  border-radius: 8px;
+  font-weight: bold;
 }
 
-/* Plné modré tlačítko */
 .btn-primary {
-  background-color: var(--color-accent);
-  color: var(--color-bg);                 /* bílý text */
+  background-color: #1e6fd9;
+  color: white;
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);            /* posune tlačítko o 2 px nahoru */
-  box-shadow: var(--shadow-accent);
+  background-color: #1757ad;
+  border-color: #1757ad;
 }
 
-/* Obtažené tlačítko: jen modrý rámeček a modrý text */
-.btn-outline {
-  background-color: transparent;
-  color: var(--color-accent);
-}
-
-/* Po najetí myší se obtažené tlačítko vyplní modrou */
 .btn-outline:hover {
-  background-color: var(--color-accent);
-  color: var(--color-bg);
-  transform: translateY(-2px);
+  background-color: #1e6fd9;
+  color: white;
 }
 
-/* Fotka */
 .hero-photo img {
   width: 100%;
-  aspect-ratio: 6 / 7;        /* poměr stran jako placeholder 600 × 700 */
-  object-fit: cover;          /* jinak velká fotka se ořízne, místo aby se zdeformovala */
-  border-radius: 24px;        /* zaoblené rohy */
-  box-shadow: var(--shadow);  /* jemný stín */
+  height: 450px;
+  object-fit: cover;
+  border-radius: 15px;
 }
 
 
-/* ==================== 3. O MNĚ ==================== */
+/* o mne */
 
 .about-text {
-  font-size: 1.125rem;
-  max-width: 65ch;            /* ch = šířka jednoho znaku; moc dlouhé řádky se špatně čtou */
-  margin-bottom: 32px;
+  font-size: 18px;
+  max-width: 650px;
+  margin-bottom: 30px;
 }
 
-/* Řádek štítků */
 .tags {
-  display: flex;
-  flex-wrap: wrap;            /* když se štítky nevejdou do řádku, zalomí se */
-  gap: 12px;
-  list-style: none;           /* bez teček odrážek */
-  margin: 0;
-  padding: 0;                 /* seznam má normálně odsazení zleva – zrušíme ho */
-}
-
-.tags li {
-  padding: 8px 18px;
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-line);
-  border-radius: 999px;       /* hodně velké číslo = úplně kulaté konce */
-  font-size: 0.9375rem;
-  font-weight: 600;
-}
-
-
-/* ==================== 4. PROJEKTY ==================== */
-
-.projects-grid {
-  display: grid;
-  /* auto-fit + minmax: kolik karet (min. 200 px) se vejde, tolik sloupců */
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;     /* flexbox, ale pod sebou: obrázek nahoře, text pod ním */
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-line);
-  border-radius: 16px;
-  overflow: hidden;           /* obrázek nepřeleze přes zaoblené rohy karty */
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-/* Najetí myší: karta se jemně zvedne a dostane stín */
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow);
-}
-
-.card img {
-  width: 100%;
-  aspect-ratio: 3 / 2;        /* všechny obrázky budou stejně vysoké… */
-  object-fit: cover;          /* …a nezdeformují se, i když nahraješ jiný rozměr */
-}
-
-/* Textová část karty. Díky flexboxu můžeme odkaz „přišpendlit" dolů,
-   takže bude ve všech kartách ve stejné výšce, i když je popis různě dlouhý. */
-.card-body {
-  flex-grow: 1;               /* vyplní celou zbývající výšku karty */
-  display: flex;
-  flex-direction: column;     /* nadpis, text a odkaz pod sebou */
-  align-items: flex-start;    /* odkaz nebude roztažený přes celou šířku karty */
-  padding: 24px;
-}
-
-.card h3 {
-  font-size: 1.25rem;
-  margin-bottom: 8px;
-}
-
-.card p {
-  color: var(--color-text-muted);
-  margin-bottom: 16px;
-}
-
-.card-link {
-  margin-top: auto;           /* auto = „všechno volné místo nade mnou" → odkaz je vždy dole */
-  font-weight: 600;
-}
-
-.card-link:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-
-/* ==================== 5. KONTAKT ==================== */
-
-/* E-mail a telefon vedle sebe; na úzké obrazovce se zalomí pod sebe */
-.contact-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px 64px;             /* 32 px mezi řádky, 64 px mezi sloupci */
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/* Popisek nad odkazem (E-mail, Telefon) */
+.tags li {
+  display: inline-block;
+  padding: 6px 16px;
+  margin: 0 8px 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+
+/* projekty */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.card-link {
+  font-weight: bold;
+}
+
+.card-link:hover {
+  text-decoration: underline;
+}
+
+
+/* kontakt */
+
+.contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.contact-list li {
+  margin-bottom: 20px;
+}
+
 .contact-label {
-  display: block;             /* span je normálně v řádku textu – takhle bude nad odkazem */
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  margin-bottom: 4px;
+  display: block;
+  font-size: 14px;
+  color: #777;
 }
 
 .contact-list a {
-  font-size: 1.5rem;
-  font-weight: 700;
-  overflow-wrap: anywhere;    /* dlouhý e-mail se na úzkém mobilu zalomí, místo aby přetekl */
-}
-
-.contact-list a:hover {
-  text-decoration: underline;
-  text-underline-offset: 6px;
+  font-size: 22px;
+  font-weight: bold;
+  word-break: break-all;
 }
 
 
-/* ==================== 6. PATIČKA ==================== */
+/* paticka */
 
-/* Tmavá patička: tmavé pozadí = barva textu, světlý text = barva pozadí */
 .site-footer {
-  margin-top: 64px;
-  padding-top: 64px;
-  background-color: var(--color-text);
-  color: var(--color-bg-alt);
-  font-size: 0.9375rem;
+  margin-top: 60px;
+  padding-top: 50px;
+  background-color: #222;
+  color: #eee;
 }
 
-/* 3 stejně široké sloupce: Dokumenty | Kontakty | Sociální sítě */
 .footer-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 40px;
-  padding-bottom: 48px;
+  padding-bottom: 40px;
 }
 
 .footer-col h2 {
-  font-size: 1rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 16px;
+  font-size: 18px;
+  margin-bottom: 15px;
 }
 
 .footer-col ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  gap: 10px;
 }
 
-/* Odkazy v patičce: světle šedé (poloprůhledná bílá), po najetí bílé */
+.footer-col li {
+  margin-bottom: 8px;
+}
+
 .footer-col a {
-  color: rgba(255, 255, 255, 0.7);
-  overflow-wrap: anywhere;    /* dlouhý e-mail se zalomí */
-  transition: color 0.2s ease;
+  color: #bbb;
+  word-break: break-all;
 }
 
 .footer-col a:hover {
-  color: var(--color-bg);
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  color: white;
 }
 
-/* Spodní řádek s © oddělený čarou */
 .footer-bottom {
-  padding-top: 24px;
-  padding-bottom: 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.6);
+  padding: 20px;
+  border-top: 1px solid #444;
+  font-size: 14px;
+  color: #999;
   text-align: center;
 }
 
 
-/* ==================== 7. MEDIA QUERIES ==================== */
-
-/* Tablet: obsah je vedle sidebaru úzký → hero dáme do jednoho sloupce dřív */
+/* tablet */
 @media (max-width: 1000px) {
-
   .hero-inner {
     grid-template-columns: 1fr;
   }
 
-  .hero-photo img {
-    max-width: 420px;
+  .projects-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-/* Mobil: všechno uvnitř platí jen pro okno UŽŠÍ než 768 px */
-@media (max-width: 767px) {
-
-  html {
-    scroll-padding-top: 112px;  /* hlavička je na mobilu dvouřádková (vyšší) */
-  }
-
-  /* Hlavička: logo nahoře, menu pod ním (4 položky by se vedle loga nevešly) */
+/* mobil */
+@media (max-width: 768px) {
   .header-inner {
     flex-direction: column;
     height: auto;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    gap: 8px;
+    padding: 10px 20px;
   }
 
-  .menu > ul {
+  .menu ul {
     gap: 20px;
   }
 
-  .menu a {
-    font-size: 0.9375rem;     /* 15 px */
+  .menu .dropdown {
+    left: -60px;
   }
 
-  /* Podmenu na mobilu vycentrujeme pod „Projekty", ať nepřeteče z obrazovky */
-  .dropdown {
-    left: 50%;
-    transform: translate(-50%, 8px);
-  }
-
-  .has-dropdown:hover .dropdown,
-  .has-dropdown:focus-within .dropdown {
-    transform: translate(-50%, 0);
-  }
-
-  /* LAYOUT SE ZLOMÍ DO JEDNOHO SLOUPCE.
-     Mapa má teď dva řádky: nahoře obsah, pod ním sidebar. */
+  /* sidebar pod obsah */
   .layout {
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -618,72 +409,29 @@ h1 {
   }
 
   .sidebar {
-    position: static;         /* na mobilu se sidebar nepřilepuje */
+    position: static;
     margin-top: 0;
-    padding-top: 48px;
-    border-top: 1px solid var(--color-line);
+    padding: 40px 0;
   }
 
   .section {
-    padding: 48px 0;
-  }
-
-  /* order: -1 posune fotku v mřížce před text, tedy nahoru */
-  .hero-photo {
-    order: -1;
+    padding: 40px 0;
   }
 
   h1 {
-    font-size: 2.5rem;
+    font-size: 36px;
   }
 
   h2 {
-    font-size: 2rem;
+    font-size: 30px;
   }
 
-  .hero-lead {
-    font-size: 1.125rem;
+  .projects-grid {
+    grid-template-columns: 1fr;
   }
 
-  .contact-list a {
-    font-size: 1.25rem;
-  }
-
-  /* Patička: 3 sloupce pod sebou */
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
-  }
-}
-
-/* Malé telefony (šířka 360 px a méně): menu zmenšíme ještě o kousek */
-@media (max-width: 360px) {
-
-  .menu > ul {
-    gap: 14px;
-  }
-
-  .menu a {
-    font-size: 0.875rem;      /* 14 px */
-  }
-}
-
-/* Když má někdo v systému zapnuté „omezit animace", pohyb vypneme */
-@media (prefers-reduced-motion: reduce) {
-
-  html {
-    scroll-behavior: auto;
-  }
-
-  .btn,
-  .card,
-  .dropdown,
-  .arrow {
-    transition: none;
-  }
-
-  .btn:hover,
-  .card:hover {
-    transform: none;
+    gap: 30px;
   }
 }
