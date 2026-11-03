@@ -1,0 +1,193 @@
+/* ===== Základ celé stránky ===== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #15438c;
+  background-color: #ffffff;
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ===== Hlavička s logem a menu ===== */
+/* Pozadí je přes celou šířku, ale boční padding srovná obsah
+   se sloupcem v <main> (1100 px uprostřed). Na mobilu zůstane 20 px. */
+header {
+  background-color: #15438c;
+  padding: 10px max(20px, calc((100% - 1100px) / 2));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.menu a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+}
+
+/* Odkaz na stránku, na které právě jsem */
+.menu a[aria-current="page"] {
+  background-color: #ffffff;
+  color: #15438c;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+/* ===== Hlavní obsah ===== */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Úvod na domovské stránce */
+.uvod {
+  background-color: #dce9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.uvod p {
+  margin: 0;
+}
+
+/* ===== Produkty vedle sebe ===== */
+.produkty {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.produkt {
+  flex: 1;
+  min-width: 250px;
+  background-color: #dce9fa;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.cena {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Modré tlačítko s bílým textem */
+.tlacitko {
+  display: inline-block;
+  background-color: #15438c;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.tlacitko:hover {
+  background-color: #0d2d61;
+}
+
+/* Zvýrazněný text */
+mark {
+  background-color: #15438c;
+  color: #ffffff;
+  padding: 0 4px;
+}
+
+/* ===== Detail produktu: text vlevo, parametry vpravo ===== */
+.detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.detail article {
+  flex: 3;
+  min-width: 280px;
+}
+
+aside {
+  flex: 1;
+  min-width: 220px;
+  background-color: #dce9fa;
+  padding: 15px;
+  border-radius: 8px;
+  align-self: flex-start;
+}
+
+dt {
+  font-weight: bold;
+}
+
+dd {
+  margin: 0 0 10px 0;
+}
+
+/* Galerie obrázků */
+/* Galerie: 4 obrázky v mřížce 2 × 2, všechny stejně velké */
+.galerie {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* Každý obrázek zabere polovinu řádku (minus polovinu mezery),
+   neroztahuje se ani nezmenšuje, takže jsou vždy 2 vedle sebe */
+.galerie figure {
+  flex: 0 0 calc(50% - 7.5px);
+  margin: 0;
+}
+
+/* Stejný poměr stran 3:2 pro všechny fotky; když má fotka jiný
+   poměr, ořízne se ze středu místo toho, aby se zdeformovala */
+.galerie img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+figcaption {
+  font-size: 14px;
+}
+
+/* Video a mapa přes celou šířku */
+iframe {
+  width: 100%;
+  height: 400px;
+  border: 2px solid #15438c;
+  border-radius: 8px;
+}
+
+/* ===== Patička ===== */
+footer {
+  background-color: #15438c;
+  color: #ffffff;
+  /* Stejné zarovnání jako hlavička */
+  padding: 20px max(20px, calc((100% - 1100px) / 2));
+  margin-top: 30px;
+}
+
+footer a {
+  color: #ffffff;
+}
+
+.zdroj {
+  font-size: 14px;
+  font-style: italic;
+}
